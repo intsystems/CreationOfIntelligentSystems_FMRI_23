@@ -1,55 +1,68 @@
 \documentclass{article}
+
 \usepackage{arxiv}
 
-\usepackage[utf8]{inputenc}
-\usepackage[english, russian]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{url}
-\usepackage{booktabs}
-\usepackage{amsfonts}
-\usepackage{nicefrac}
-\usepackage{microtype}
-\usepackage{lipsum}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{cleveref}       % smart cross-referencing
+\usepackage{lipsum}         % Can be removed after putting your text content
 \usepackage{graphicx}
+\usepackage[english, russian]{babel}
 \usepackage{natbib}
 \usepackage{doi}
 
+\title{Deep FMRI Attention }
 
+% Here you can change the date presented in the paper title
+%\date{September 9, 1985}
+% Or remove it
+%\date{}
 
-\title{A template for the \emph{arxiv} style}
+\newif\ifuniqueAffiliation
+% Uncomment to use multiple affiliations variant of author block 
+\uniqueAffiliationtrue
 
-\author{ David S.~Hippocampus\thanks{Use footnote for providing further
-		information about author (webpage, alternative
-		address)---\emph{not} for acknowledging funding agencies.} \\
-	Department of Computer Science\\
-	Cranberry-Lemon University\\
-	Pittsburgh, PA 15213 \\
-	\texttt{hippo@cs.cranberry-lemon.edu} \\
+\ifuniqueAffiliation % Standard variant of author block
+\author{Galina Boeva \\
+	MIPT\\
+	Antiplagiat\\
+	  Skoltech \\
 	%% examples of more authors
-	\And
-	Elias D.~Striatum \\
-	Department of Electrical Engineering\\
-	Mount-Sheikh University\\
-	Santa Narimana, Levand \\
-	\texttt{stariate@ee.mount-sheikh.edu} \\
-	%% \AND
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
+ \and Sebastian Wolf-Kornilov \\
+ MIPT \\
+ Skoltech
+ \and Marat Khusainov \\
+ MIPT 
+ \and Bair Mihailov \\
+ MIPT\\
+ Skoltech
 }
-\date{}
+\else
+% Multiple affiliations variant of author block
+\usepackage{authblk}
+\renewcommand\Authfont{\bfseries}
+\setlength{\affilsep}{0em}
+% box is needed for correct spacing with authblk
+\newbox{\orcid}\sbox{\orcid}{\includegraphics[scale=0.06]{orcid.pdf}} 
+\author[1]{%
+	\href{https://orcid.org/0000-0000-0000-0000}{\usebox{\orcid}\hspace{1mm}David S.~Hippocampus\thanks{\texttt{hippo@cs.cranberry-lemon.edu}}}%
+}
+\author[1,2]{%
+	\href{https://orcid.org/0000-0000-0000-0000}{\usebox{\orcid}\hspace{1mm}Elias D.~Striatum\thanks{\texttt{stariate@ee.mount-sheikh.edu}}}%
+}
+\affil[1]{}
+\affil[2]{}
+\fi
 
+% Uncomment to override  the `A preprint' in the header
+%\renewcommand{\headeright}{Technical Report}
+%\renewcommand{\undertitle}{Technical Report}
 \renewcommand{\shorttitle}{\textit{arXiv} Template}
 
 %%% Add PDF metadata to help others organize their library
@@ -66,93 +79,40 @@ pdfkeywords={First keyword, Second keyword, More},
 \maketitle
 
 \begin{abstract}
-	\lipsum[1]
+В данном исследовании предлагается рассмотреть пространственно-временную модель визуализации временного ряда данных FMRI (Функциональная магнитно-резонансная томография) для предсказания на основе целевого фрагмента FMRI видео. В качестве решения мы предлагаем новую технику глубокого обучения основанную на механизме внимания, примененного как и к пространственной составляющей данных, так и к временной компоненте. Также интересной модификацией может являться применение CNNs для улавливания зависимостей между признаками в пространстве. Итоговая модель обладает высокой скоростью  работы и высокими метриками качества предсказаний.      
 \end{abstract}
 
 
+% keywords can be removed
 \keywords{First keyword \and Second keyword \and More}
 
-\section{Introduction}
-\lipsum[2]
-\lipsum[3]
 
-\section{Headings: first level}
-\label{sec:headings}
+\section{Введение}
 
-\lipsum[4] See Section \ref{sec:headings}.
+В данном исследовании предлагается рассмотреть пространственно-временную модель визуализации временного ряда данных FMRI (Функциональная магнитно-резонансная томография) для предсказания на основе целевого фрагмента FMRI видео. При просмотре видеороликов в интернете, фильмов, Tik-tok, наш мозг реагирует, что приводит в возбуждение разные отделы мозга. Например, средний мозг реагирует на зрительные раздражения, в свою очередь задний отдел реагирует на мимику человека. FMRI позволяет определить активность мозга в тот или иной момент времени, так как при влиянии раздражителей мы можем выявить зависимость реакции конкретной части головного мозга.
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
+В данной области основной проблемой является решение трудностей с огромной размерностью данных. В ряде статей~\cite{ rezaei2023deep, rezaei2020bayesian} предлагается применение модели декодера для  многомерных наблюдений, используя теорему Байеса и условие марковости для входных данных. Также использовался байесовских подход и в статье ~\cite{yousefi2019decoding}, авторы изучают когнитивные процессы, которые в свою очередь тоже являются многомерным временным рядом. Предлагается использовать структуру моделирования, в которой когнитивный процесс определяется как низкоразмерная динамическая латентная переменная, называемая когнитивным состоянием. Для моделирования всех этих взаимосвязей применяется архитектура энкодер-декодер. 
 
-\subsubsection{Headings: third level}
-\lipsum[6]
+Сопутствующей к большой размерности данных  проблемой является высокое время обработки видео и FMRI. В работе \cite{rezaei2021real} авторы предложили вместо схемы инкодер-декодер использовать смесь гауссиан для моделирования отклика каждой клетки FMRI, тем самым сократив время вычислений до приемлемого на практике. Для обучения использовался принцип максимизации вариационной нижней оценки ELBO. Однако в статье рассматривались только низкоразмерные данные без пространственной составляющей, что является плохим приближением FMRI. 
 
-\paragraph{Paragraph}
-\lipsum[7]
+Анализ данных FMRI проводился многими авторами. Интересным подходом является применение методов, которые могут учитывать как пространственную, так и временную компоненту в данных. Временная компонента это распределение каждого отдельного признака, отвечающего за конкретный отдел мозга, по временной шкале. Пространственная в свою очередь отвечает за связь различных признаков определенных отделов мозга друг с другом, которые могут описывать разные моменты времени. Например, в статье ~\cite{azevedo2022deep} авторами рассматривается метод, основанный на двух блоках. Первый - это сверточная временная сетка для работы с временной компонентой данных. Вторая - это граф для связи признаков, которые распределены в пространстве, то есть учет пространственной компоненты.  
+В работе ~\cite{malkiel2022selfsupervised} используется трансформер, обученный в 2 этапа: сначала заполнение пропусков в видео fMRI, затем предсказание таргетной величины. 
+Другим примером анализа данных FMRI является работа ~\cite{Albuquerque_FMRI}. Авторами предложен гибридный подход, объединяющий глубокие порождающие модели и гауссовские процессы в обобщенной аддитивной модели.
+
+Так как использования гауссовских процессов в моделях вариационных автокодировщиков может играть одну из ключевых ролей в нашей задаче, стоит отметить работу ~\cite{dai2016variational}, которая по сути является пионерской в данной области. Авторами была предложена модель, которая состоит из нескольких слоев скрытых переменных и использует гауссовские процессы для отображениия между последовательными слоями. Несмотря на то, что в статье рассматривается реализация данной модели на низкоразмерных датасетах, она послужила фундаментом для развития данной области исследования. Гауссовские процессы нашли свое применение не только в моделях вариационных автокодировщиков. Так, в работах ~\cite{jankowiak2020parametric} и ~\cite{wang2022intuitive}рассматривается их применение в задаче регрессии. В случае регрессии часто прогнозируемая дисперсия преобладает над шумом во входных данных. Кроме того,  оценки неопределенности,  практически не используют неопределенность функции, зависящей от входных данных. Обе работы решают эту проблему и, таким образом, дают существенно улучшенные оценки неопределенности прогнозирования.
 
 
+В работе ~\cite{matsubara2019deep} рассматриваются подходы, которые помогают работать с сигналами, не интересующие нас при предсказании. Так как данные многомерны, то и признаком порождается в много раз больше, что позволяет утверждать, что нужно проводить фильтрацию. Предложена генеративная модель на данных FMRI в состоянии покоя. Предлагаемая модель обусловлена предположением о состоянии субъекта и оценивает апостериорную вероятность состояния субъекта с учетом данных визуализации, используя теорему Байеса.
 
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
-
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
-
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\textwidth]{../figures/log_reg_cs_exp.eps}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
+Генерация fMRI по видео является востребованной задачей. В частности, в 2021 году соревнование The Algonauts project было посвящено именно этой задаче ~\cite{DBLP:journals/corr/abs-2104-13714}. В работе ~\cite{Yang2021.08.24.457581}победителей использовался ансамбль моделей, каждая из которых фокусировалась на различных областях видео: движение, границы объектов, звук и т.п.
 
 
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
 
-\subsection{Lists}
-\begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
 
+
+ 
+ 
 
 \bibliographystyle{unsrtnat}
-\bibliography{references}
-
+\bibliography{references} 
 \end{document}
