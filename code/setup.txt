@@ -1,0 +1,5 @@
+
+!aws s3 sync --no-sign-request --quiet s3://openneuro.org/ds003688 ds003688-download/
+!wget https://researchpublic.blob.core.windows.net/vtn/VTN_VIT_B_KINETICS.pyth
+!git clone https://github.com/intsystems/CreationOfIntelligentSystems_video_fMRI.git
+!python CreationOfIntelligentSystems_video_fMRI/src/mylib/data_preprocess_and_load/preprocessing.py
