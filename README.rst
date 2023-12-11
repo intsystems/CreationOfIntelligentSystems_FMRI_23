@@ -23,9 +23,7 @@
 
 Abstract
 ========
-
-Purus sit amet luctus venenatis lectus magna fringilla. Condimentum id venenatis a condimentum vitae sapien. Auctor neque vitae tempus quam pellentesque nec nam aliquam. Eget egestas purus viverra accumsan in. Nam aliquam sem et tortor. Donec et odio pellentesque diam volutpat commodo. Odio pellentesque diam volutpat commodo sed egestas. Sit amet dictum sit amet justo. Pellentesque sit amet porttitor eget. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Quis varius quam quisque id diam vel quam elementum. Ornare lectus sit amet est placerat in. Vulputate dignissim suspendisse in est ante. Elit sed vulputate mi sit amet mauris. Egestas sed tempus urna et pharetra pharetra. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus.
-
+В данном исследовании предлагается рассмотреть пространственно-временную модель визуализации временного ряда данных fMRI (Функциональная магнитно-резонансная томография) для предсказания на основе целевого фрагмента fMRI видео. В качестве решения мы предлагаем новую технику глубокого обучения основанную на механизме внимания, примененного как и к пространственной составляющей данных, так и к временной компоненте. Также интересной модификацией может являться применение CNNs для улавливания зависимостей между признаками в пространстве. Итоговая модель обладает высокой скоростью  работы и высокими метриками качества предсказаний.  
 Research publications
 ===============================
 1. 
@@ -36,5 +34,6 @@ Presentations at conferences on the topic of research
 
 Software modules developed as part of the study
 ======================================================
-1. A python package *mylib* with all implementation `here <https://github.com/intsystems/ProjectTemplate/tree/master/src>`_.
-2. A code with all experiment visualisation `here <https://github.comintsystems/ProjectTemplate/blob/master/code/main.ipynb>`_. Can use `colab <http://colab.research.google.com/github/intsystems/ProjectTemplate/blob/master/code/main.ipynb>`_.
+1. Установите зависимости из файла `code/requirements.txt`
+2. Выполните команды из файла `code/setup.txt`
+3. Запустите файл `code/run.py`, чтобы повторить эксперименты
